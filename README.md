@@ -53,7 +53,7 @@ Run shell or VS Code commands from the status bar and see live state at a glance
   {
     "name": "$(shield) Proxy",
     "tooltip": "Toggle the proxy container",
-    "command": "docker start my-container || docker stop my-container",
+    "command": "powershell -NoProfile -Command \"if ((docker inspect -f '{{.State.Running}}' my-container) -eq 'true') { docker stop my-container } else { docker start my-container }\"",
     "state": {
       "command": "docker inspect -f {{.State.Running}} my-container",
       "match": "^true$",
