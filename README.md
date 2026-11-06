@@ -32,6 +32,8 @@ Run shell or VS Code commands from the status bar and see live state at a glance
 | `command` | Shell command run on click. |
 | `vscodeCommand` | VS Code command id run on click instead of `command`. |
 | `args` | Arguments for `vscodeCommand`. |
+| `thenVscodeCommand` | VS Code command id run after `command` succeeds (background mode), e.g. `workbench.action.reloadWindow`. |
+| `thenArgs` | Arguments for `thenVscodeCommand`. |
 | `cwd` | Working directory. Supports `${workspaceFolder}` and `${userHome}`. Default: first workspace folder, else home. |
 | `runIn` | `background` (default) or `terminal`. |
 | `alignment` | `left` (default) or `right`. |

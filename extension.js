@@ -209,6 +209,13 @@ async function click(index) {
 	if (r.code === 0) {
 		const line = lastLine(r.stdout).slice(0, 80);
 		vscode.window.setStatusBarMessage('$(check) ' + name + (line ? ': ' + line : ''), 4000);
+		if (def.thenVscodeCommand) {
+			try {
+				await vscode.commands.executeCommand(def.thenVscodeCommand, ...(def.thenArgs || []));
+			} catch (e) {
+				vscode.window.showErrorMessage(name + ': ' + e.message);
+			}
+		}
 	} else {
 		const line = lastLine(r.stderr) || lastLine(r.stdout);
 		vscode.window.showErrorMessage(
