@@ -1,0 +1,220 @@
+{
+	"name": "stateful-buttons",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"version": "0.1.0",
+	"publisher": "wheatlay",
+	"author": {
+		"name": "Wheatlay"
+	},
+	"license": "MIT",
+	"icon": "images/icon.png",
+	"galleryBanner": {
+		"color": "#1F2328",
+		"theme": "dark"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Wheatlay/stateful-buttons"
+	},
+	"keywords": [
+		"status bar",
+		"buttons",
+		"toggle",
+		"action buttons",
+		"run command",
+		"shell",
+		"scripts"
+	],
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"pricing": "Free",
+	"main": "./extension.js",
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": "limited",
+			"description": "%untrusted%",
+			"restrictedConfigurations": [
+				"statefulButtons.buttons"
+			]
+		},
+		"virtualWorkspaces": false
+	},
+	"scripts": {
+		"check": "node --check extension.js",
+		"package": "npx --yes @vscode/vsce package"
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "statefulButtons.addButton",
+				"title": "%cmd.addButton%",
+				"category": "Stateful Buttons"
+			},
+			{
+				"command": "statefulButtons.editButtons",
+				"title": "%cmd.editButtons%",
+				"category": "Stateful Buttons"
+			},
+			{
+				"command": "statefulButtons.refresh",
+				"title": "%cmd.refresh%",
+				"category": "Stateful Buttons"
+			},
+			{
+				"command": "statefulButtons.showLog",
+				"title": "%cmd.showLog%",
+				"category": "Stateful Buttons"
+			},
+			{
+				"command": "statefulButtons.click",
+				"title": "Stateful Buttons: Click",
+				"category": "Stateful Buttons"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "statefulButtons.click",
+					"when": "false"
+				}
+			]
+		},
+		"configuration": {
+			"title": "Stateful Buttons",
+			"properties": {
+				"statefulButtons.buttons": {
+					"type": "array",
+					"default": [],
+					"scope": "window",
+					"markdownDescription": "%config.buttons%",
+					"items": {
+						"type": "object",
+						"required": [
+							"name"
+						],
+						"additionalProperties": false,
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "Label. Supports $(icon) codicons."
+							},
+							"tooltip": {
+								"type": "string",
+								"description": "Tooltip text."
+							},
+							"command": {
+								"type": "string",
+								"description": "Shell command run on click."
+							},
+							"vscodeCommand": {
+								"type": "string",
+								"description": "VS Code command id run on click instead of `command`."
+							},
+							"args": {
+								"type": "array",
+								"description": "Arguments for vscodeCommand."
+							},
+							"cwd": {
+								"type": "string",
+								"description": "Working directory. Supports ${workspaceFolder} and ${userHome}. Default: first workspace folder, else home directory."
+							},
+							"runIn": {
+								"type": "string",
+								"enum": [
+									"background",
+									"terminal"
+								],
+								"default": "background",
+								"description": "Where to run the command."
+							},
+							"alignment": {
+								"type": "string",
+								"enum": [
+									"left",
+									"right"
+								],
+								"default": "left",
+								"description": "Status bar side."
+							},
+							"priority": {
+								"type": "number",
+								"default": 0,
+								"description": "Status bar priority (higher = closer to the edge)."
+							},
+							"color": {
+								"type": "string",
+								"description": "Theme color id or #hex for the normal (stateless) look."
+							},
+							"state": {
+								"type": "object",
+								"additionalProperties": false,
+								"required": [
+									"command"
+								],
+								"description": "Live ON/OFF state of the button.",
+								"properties": {
+									"command": {
+										"type": "string",
+										"description": "Shell command whose result decides ON/OFF."
+									},
+									"match": {
+										"type": "string",
+										"description": "Regex tested against trimmed stdout. If given, ON = regex matches; otherwise ON = exit code 0."
+									},
+									"interval": {
+										"type": "number",
+										"default": 0,
+										"description": "Seconds between checks while the window is focused. 0 = only on click, focus and start."
+									},
+									"on": {
+										"type": "object",
+										"description": "Look when ON.",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"tooltip": {
+												"type": "string"
+											},
+											"color": {
+												"type": "string"
+											}
+										}
+									},
+									"off": {
+										"type": "object",
+										"description": "Look when OFF.",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"tooltip": {
+												"type": "string"
+											},
+											"color": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"statefulButtons.shell": {
+					"type": "string",
+					"default": "",
+					"description": "Shell path used to run commands, e.g. powershell.exe. Empty = Node default (cmd.exe on Windows, /bin/sh elsewhere)."
+				}
+			}
+		}
+	}
+}

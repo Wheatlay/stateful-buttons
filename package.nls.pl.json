@@ -1,0 +1,10 @@
+{
+  "displayName": "Stateful Buttons",
+  "description": "Przyciski na pasku stanu, które uruchamiają polecenia powłoki lub VS Code i pokazują na żywo stan WŁ./WYŁ. Lżejsza alternatywa dla Action Buttons, ze stanem.",
+  "cmd.addButton": "Dodaj przycisk...",
+  "cmd.editButtons": "Edytuj przyciski (settings.json)",
+  "cmd.refresh": "Odśwież stany przycisków",
+  "cmd.showLog": "Pokaż log",
+  "untrusted": "Przyciski zdefiniowane w ustawieniach obszaru roboczego uruchamiają polecenia, więc w trybie ograniczonym są ignorowane. Przyciski z ustawień użytkownika działają dalej.",
+  "config.buttons": "Przyciski paska stanu. Każdy uruchamia polecenie powłoki `command` lub `vscodeCommand` i może pokazywać stan WŁ./WYŁ. na żywo przez `state`. Przyciski z obszaru roboczego łączą się z przyciskami użytkownika i są ignorowane w trybie ograniczonym."
+}

@@ -1,0 +1,10 @@
+{
+  "displayName": "Stateful Buttons",
+  "description": "Status bar buttons that run shell or VS Code commands and show live ON/OFF state. A lighter, stateful alternative to Action Buttons.",
+  "cmd.addButton": "Add Button...",
+  "cmd.editButtons": "Edit Buttons (settings.json)",
+  "cmd.refresh": "Refresh Button States",
+  "cmd.showLog": "Show Log",
+  "untrusted": "Buttons defined in workspace settings run commands, so they are ignored in Restricted Mode. Buttons from user settings keep working.",
+  "config.buttons": "Status bar buttons. Each button runs a shell `command` or a `vscodeCommand`, and can show a live ON/OFF state via `state`. Workspace buttons are merged with user buttons and ignored in Restricted Mode."
+}
